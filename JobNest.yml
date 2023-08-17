@@ -1,0 +1,300 @@
+openapi: 3.0.3
+info:
+  title: JobNest
+  description: |-
+    Stay on top of your job search with JobNest The ultimate Job Application Management Tool”. JobNet is a web application that helps job seekers find suitable job opportunities and to keep a track of it. Candidates will register and authenticate themselves. Job seekers will be able to create an account and log in to the application. They will be able to search for job opportunities based on their preferences from the job posted by the recruiter. Recruiters will be able to post job openings. The application will provide analytics and insights on jobs selected by the candidate with which they can track their status and improve their performance. The application will be built using modern web development technologies such as React, Node.js, MongoDB, and Express.
+  version: 1.0.0
+
+tags:
+  - name: user
+    description: Operations about user
+paths:
+  /users:
+    post:
+      tags:
+        - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/login:
+    get:
+      tags:
+        - user
+      summary: logs the user into the system
+      description: ''
+      operationId: loginUser
+      parameters:
+        - name: username
+          in: query
+          description: The username for login
+          required: false
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: password for login in clear text
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid username/password supplied
+  /users/logout:
+    get:
+      tags:
+        - user
+      summary: Logs out current logged in user session
+      description: ''
+      operationId: logoutUser
+      parameters: []
+      responses:
+        default:
+          description: successful operation
+          
+  /users/{username}:
+    get:
+      tags:
+        - user
+      summary: Get user by user name
+      description: ''
+      operationId: getUserByName
+      parameters:
+        - name: username
+          in: path
+          description: 'type your username for searching the user '
+          required: true
+          schema:
+            type: string
+            
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'          
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+
+    put:
+        tags:
+          - user
+        summary: Update the user
+        description: Upadate the existing user 
+        operationId: updateUser
+        parameters:
+          - name: username
+            in: path
+            description: 'type the username for the user you want to update'
+            required: true
+            schema:
+               type: string
+        requestBody:
+          description: Update an existent user in the store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/User'          
+          '400':
+           description: Invalid username supplied
+          '404':
+            description: User not found
+  /job:
+    post:
+      tags:
+        - job
+      summary: Create a new job listing
+      description: Use this endpoint to create a new job listing
+      operationId: createJob
+      requestBody:
+        description: Created job object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+  /job/{job_id}/apply:
+    post:
+      tags:
+        - job
+      summary: Apply for a job opportunity
+      description: Use this endpoint to apply for a new job listing
+      operationId: Apply for Job
+      requestBody:
+        description: Application for a Job 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+      responses:
+        default:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job' 
+  /job/{jobId}:
+    get:
+      tags:
+        - job
+      summary: Retrieve a job listing by ID or Name
+      description: Use this endpoint to retrieve a specific job listing by ID
+      operationId: SearchJob
+      parameters:
+        - name: Job ID
+          in: query
+          description: The ID of the job listing to retrieve
+          required: false
+          schema:
+            type: integer
+        - name: Company Name 
+          in: query
+          description: The Name of the company who has posted the job 
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the job listing
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Job listing not found
+  /:
+    get:
+      tags:
+        - job
+      summary: Retrieve All jobs
+      description: Get all job applications available for a student
+      operationId: AllJobs
+      parameters:
+        - name: All Jobs
+          in: query
+          description: Searches for all the Jobs Available
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully retrieved the all job listings
+          content:
+            application/json:
+              schema:
+                type: string
+
+  /users/{username}/analytics:
+    get:
+      tags:
+        - analytics
+      summary: Get job search analytics for a student
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: integer
+          description: The ID of the student
+      responses:
+        '200':
+          description: Returns the job search analytics for the student
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        username:
+          type: string
+          example: theUser
+        firstName:
+          type: string
+          example: abc
+        lastName:
+          type: string
+          example: xyz
+        email:
+          type: string
+          example: abc@email.com
+        password:
+          type: string
+          example: '12345'
+        phone:
+          type: string
+          example: '12345'
+
+    Job:
+      type: object
+      properties:
+        Jobid:
+          type: integer
+          format: int64
+          example: 1
+        jobLocation:
+          type: string
+          example: Boston
+        comapany:
+          type: string
+          example: Oracle
+        jobType:
+          type: string
+          example: SDE
+        jobStatus:
+          type: string
+          example: Available
+        jobPosted:
+          type: integer
+          example: '12-12-2022'
+
+    Analytics:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        company:
+          type: string
