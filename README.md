@@ -3,6 +3,12 @@
 
 ![WhatsApp Image 2023-09-05 at 10 02 27](https://github.com/VatsalDoshi/JobNest/assets/114709734/58f88974-d437-4b76-8232-8ce8fed63529)
 
+![image](https://github.com/VatsalDoshi/JobNest/assets/114709734/f10bd27e-d732-4eaf-b70c-2a8c6194ccdb)
+
+![image](https://github.com/VatsalDoshi/JobNest/assets/114709734/20d7cd59-a8e1-4bba-9ace-d70337945665)
+
+
+
 
 
 
