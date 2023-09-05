@@ -1,6 +1,5 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/0wrsx4Jb)
+
 # JOBNEST
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ![WhatsApp Image 2023-09-05 at 10 02 27](https://github.com/VatsalDoshi/JobNest/assets/114709734/58f88974-d437-4b76-8232-8ce8fed63529)
 
